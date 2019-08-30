@@ -42,6 +42,8 @@ module.exports = {
         publicPath: '/dist/',
         filename: 'bundle.js'
     },
+    /*todo remove from production*/
+    devtool: 'eval-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'public/'),
         port: 3000,
