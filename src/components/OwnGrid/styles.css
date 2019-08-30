@@ -1,0 +1,4 @@
+.grid {
+    display: table;
+    border-collapse: collapse;
+}

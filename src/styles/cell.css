@@ -1,0 +1,11 @@
+.square, .index {
+    --size: 25px;
+    --cell-border-width: 1px;
+    --cell-border-style: solid;
+
+    display: table-cell;
+    height: var(--size);
+    width: var(--size);
+    border-width: var(--cell-border-width);
+    border-style: var(--cell-border-style);
+}
