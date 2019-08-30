@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: [ './src/index.js', './src/styles/styles.css' ],
+    entry: ['./src/index.js', './src/styles/styles.css'],
     mode: 'development',
     module: {
         rules: [
@@ -32,10 +32,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']/*,
+        extensions: ['*', '.js', '.jsx'],
         alias: {
             'react-dom': '@hot-loader/react-dom',
-        }*/
+        }
     },
     output: {
         path: path.resolve(__dirname, 'dist/'),
