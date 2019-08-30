@@ -1,0 +1,16 @@
+{
+  "name": "battleship",
+  "version": "0.1.0",
+  "description": "A web version of Battleship game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "game",
+    "web",
+    "battleship"
+  ],
+  "author": "Eugene Garbuzov",
+  "license": "GPL-3.0-or-later"
+}
