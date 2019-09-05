@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// todo look for webpack deprecated API checker
 module.exports = {
     entry: ['./src/index.js', './src/styles/styles.css'],
     mode: 'development',
@@ -20,14 +21,8 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    }
-                ]
+                exclude: /(node_modules)/,
+                use: ['style-loader', 'css-loader']
             }
         ]
     },

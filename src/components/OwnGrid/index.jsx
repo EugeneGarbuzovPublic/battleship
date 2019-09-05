@@ -3,10 +3,12 @@ import './styles.css';
 import Row from '../Row';
 import IndexRow from '../IndexRow';
 
-export default function OwnGrid() {
+export default function OwnGrid(props) {
     const rows = new Array(10).fill(0).map((rowElement, rowIndex) => {
         return (
-            <Row key={rowIndex} index={rowIndex + 1} />
+            /*todo consider removing disabled prop*/
+            /*todo consider implementing disabled passing via context*/
+            <Row key={rowIndex} index={rowIndex} disabled={props.disabled} />
         );
     });
 

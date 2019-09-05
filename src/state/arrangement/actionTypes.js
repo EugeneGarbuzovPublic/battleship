@@ -1,0 +1,1 @@
+export const SET_SHIP_TYPE = 'SET_SHIP_TYPE';

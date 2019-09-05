@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
-import cells from './cells/reducer';
+import stage from './stage/reducer';
+import arrangement from './arrangement/reducer';
 
+/*todo rearrange reducers*/
 export default combineReducers({
-    cells
+    stage,
+    arrangement
 });
