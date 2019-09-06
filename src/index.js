@@ -5,8 +5,13 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './state/rootReducer';
 import App from './components/App';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+/*todo add redux-devtools to applyMiddleware*/
+const store = createStore(
+    rootReducer,
+    devToolsEnhancer()
+);
 
 ReactDOM.render(
     <Provider store={store}>

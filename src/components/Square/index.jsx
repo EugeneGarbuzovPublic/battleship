@@ -1,10 +1,12 @@
 import React from 'react';
 import './styles.css';
 import classNames from 'classnames';
+import squareStates from '../../domain/squareStates';
 
 export default function Square(props) {
-    const classNamesString = classNames({
+    const className = classNames({
         square: true,
+        'intact-ship-part': props.state === squareStates.INTACT_SHIP_PART,
         /*todo remove disabled*/
         disabled: props.disabled
     });
@@ -19,6 +21,6 @@ export default function Square(props) {
     };
 
     return (
-        <div className={classNamesString} onClick={onClick} />
+        <div className={className} onClick={onClick} />
     );
 }

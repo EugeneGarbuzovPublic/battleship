@@ -1,6 +1,4 @@
-/*todo consider moving to a better place*/
-
 export default {
-    EMPTY: 'empty',
-    INTACT: 'intact',
+    EMPTY: 'EMPTY',
+    INTACT_SHIP_PART: 'INTACT_SHIP_PART',
 };

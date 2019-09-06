@@ -1,19 +1,22 @@
 import React from 'react';
 import './styles.css';
+import classNames from 'classnames';
 
 export default function Index(props) {
-    let classes = "index";
-    switch (props.position) {
-        case 'top':
-        case 'top-side':
-        case 'left':
-        case 'right':
-        case 'bottom':
-            classes += ` index-${props.position}`;
-            break;
-    }
+    const knownPositions = [
+        'top',
+        'top-side',
+        'left',
+        'right',
+        'bottom'
+    ];
+
+    const className = classNames({
+        index: true,
+        [`index-${props.position}`]: knownPositions.includes(props.position)
+    });
 
     return (
-        <div className={classes}>{props.index}</div>
+        <div className={className}>{props.index}</div>
     );
 }

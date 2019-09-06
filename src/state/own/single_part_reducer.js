@@ -1,4 +1,4 @@
-import { ADD_SHIP_PART } from './actionTypes';
+import { ADD_SHIP } from './actionTypes';
 import squareStates from '../../domain/squareStates';
 
 /*todo add arrangement modes (drag'n'drop)*/
@@ -51,7 +51,7 @@ function addShipPart(grid, x, y) {
     }
 
     const newRow = [...grid[x]];
-    newRow[x][y] = squareStates.INTACT;
+    newRow[x][y] = squareStates.INTACT_SHIP_PART;
     const newGrid = [...grid];
     newGrid[x] = newRow;
     return newGrid;
@@ -59,7 +59,7 @@ function addShipPart(grid, x, y) {
 
 export default function (state = initialGrid, action) {
     switch (action.type) {
-        case ADD_SHIP_PART:
+        case ADD_SHIP:
             return addShipPart(state, action.horizontalIndex,
                 action.verticalIndex);
         default:

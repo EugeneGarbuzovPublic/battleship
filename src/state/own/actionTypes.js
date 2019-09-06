@@ -1,1 +1,0 @@
-export const ADD_SHIP_PART = 'ADD_SHIP_PART';

@@ -11,22 +11,13 @@ import ShipTypeSelection from '../ShipTypeSelection';
 /*todo global redux-saga*/
 /*todo global react-router*/
 /*todo global logging*/
-
+/*todo global ImmutableJS*/
 /*todo global propTypes*/
 
 /*todo React.memo*/
 /*todo highlight squares on hover*/
 
 function App(props) {
-
-    /*useEffect(() => {
-        const intervalID = setInterval(props.setTime, 2000);
-
-        return () => {
-            clearInterval(intervalID);
-        };
-    }, []);*/
-
     /*todo add clear/undo buttons during arrangement*/
 
     /*todo extract component to file*/
