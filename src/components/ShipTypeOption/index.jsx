@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import { setShipType } from '../../state/arrangement/actionCreators';
 
 function ShipTypeOption(props) {
+    const id = `type_${props.type}`;
+
     return (
         <div>
-            <input type="radio" id={`type${props.type}`}
+            <input type="radio" id={id}
                    onChange={() => props.setShipType(props.type)}
-                   value={props.type} checked={props.shipType === props.type} />
-            <label htmlFor={`type${props.type}`}>
+                   value={props.type} checked={props.type === props.shipType} />
+            <label htmlFor={id}>
                 {/*todo localizable*/}
                 {props.type}
             </label>
+            {/*todo remaining ships number*/}
         </div>
     );
 }

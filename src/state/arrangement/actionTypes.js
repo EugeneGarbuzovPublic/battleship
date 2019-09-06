@@ -1,2 +1,3 @@
 export const SET_SHIP_TYPE = 'SET_SHIP_TYPE';
+export const SET_SHIP_ORIENTATION = 'SET_SHIP_ORIENTATION';
 export const ADD_SHIP = 'ADD_SHIP';

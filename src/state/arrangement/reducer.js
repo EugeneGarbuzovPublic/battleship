@@ -1,5 +1,5 @@
 import shipTypes from '../../domain/shipTypes';
-import { SET_SHIP_TYPE } from './actionTypes';
+import { SET_SHIP_ORIENTATION, SET_SHIP_TYPE } from './actionTypes';
 import squareStates from '../../domain/squareStates';
 import { ADD_SHIP } from './actionTypes';
 import shipOrientations from '../../domain/shipOrientations';
@@ -32,6 +32,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 shipType: action.shipType
+            };
+        /*todo consider merging with SET_SHIP_TYPE*/
+        case SET_SHIP_ORIENTATION:
+            if (!(action.shipOrientation in shipOrientations)) {
+                return state;
+            }
+
+            return {
+                ...state,
+                shipOrientation: action.shipOrientation
             };
         case ADD_SHIP:
             const gameState = {

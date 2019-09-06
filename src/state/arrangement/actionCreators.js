@@ -1,10 +1,16 @@
-import { SET_SHIP_TYPE } from './actionTypes';
-import { ADD_SHIP } from './actionTypes';
+import { SET_SHIP_TYPE, ADD_SHIP, SET_SHIP_ORIENTATION } from './actionTypes';
 
 export function setShipType(shipType) {
     return {
         type: SET_SHIP_TYPE,
         shipType
+    };
+}
+
+export function setShipOrientation(shipOrientation) {
+    return {
+        type: SET_SHIP_ORIENTATION,
+        shipOrientation
     };
 }
 
