@@ -1,6 +1,6 @@
-import 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './state/rootReducer';
@@ -13,9 +13,16 @@ const store = createStore(
     devToolsEnhancer()
 );
 
-ReactDOM.render(
+/*todo write it in a better way*/
+const StoredApp = () => (
     <Provider store={store}>
         <App />
-    </Provider>,
-    document.getElementById('root')
+    </Provider>
+);
+
+const HotReplacedApp = hot(StoredApp);
+
+ReactDOM.render(
+    <HotReplacedApp />,
+    document.getElementsByTagName('main')[0]
 );

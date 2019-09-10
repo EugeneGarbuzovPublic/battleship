@@ -1,5 +1,4 @@
-import { hot } from 'react-hot-loader/root';
-import React/*, { useEffect }*/ from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import OwnGrid from '../OwnGrid';
 import './styles.css';
@@ -8,7 +7,7 @@ import ShipTypeSelection from '../ShipTypeSelection';
 import ShipOrientationSelection from '../ShipOrientationSelection';
 
 /*todo global tests*/
-/*todo global ESLint*/
+/*todo global ESLint, VS support*/
 /*todo global redux-saga*/
 /*todo global react-router*/
 /*todo global logging*/
@@ -54,4 +53,4 @@ const ConnectedApp = connect(
     })
 )(App);
 
-export default hot(ConnectedApp);
+export default ConnectedApp;

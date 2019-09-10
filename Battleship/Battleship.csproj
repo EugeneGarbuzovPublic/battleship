@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>Battleship</AssemblyName>
+    <RootNamespace>Battleship</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include=".babelrc" />
+    <Content Include="ClientApp\src\components\App\index.jsx" />
+    <Content Include="ClientApp\src\components\App\styles.css" />
+    <Content Include="ClientApp\src\components\IndexRow\index.jsx" />
+    <Content Include="ClientApp\src\components\IndexRow\styles.css" />
+    <Content Include="ClientApp\src\components\Index\index.jsx" />
+    <Content Include="ClientApp\src\components\Index\styles.css" />
+    <Content Include="ClientApp\src\components\OwnGrid\index.jsx" />
+    <Content Include="ClientApp\src\components\OwnGrid\styles.css" />
+    <Content Include="ClientApp\src\components\OwnSquare\index.jsx" />
+    <Content Include="ClientApp\src\components\Row\index.jsx" />
+    <Content Include="ClientApp\src\components\Row\styles.css" />
+    <Content Include="ClientApp\src\components\ShipOrientationOption\index.jsx" />
+    <Content Include="ClientApp\src\components\ShipOrientationSelection\index.jsx" />
+    <Content Include="ClientApp\src\components\ShipOrientationSelection\styles.css" />
+    <Content Include="ClientApp\src\components\ShipTypeOption\index.jsx" />
+    <Content Include="ClientApp\src\components\ShipTypeSelection\index.jsx" />
+    <Content Include="ClientApp\src\components\Square\index.jsx" />
+    <Content Include="ClientApp\src\components\Square\styles.css" />
+    <Content Include="ClientApp\src\domain\operations.js" />
+    <Content Include="ClientApp\src\domain\shipOrientations.js" />
+    <Content Include="ClientApp\src\domain\shipTypes.js" />
+    <Content Include="ClientApp\src\domain\squareStates.js" />
+    <Content Include="ClientApp\src\domain\stages.js" />
+    <Content Include="ClientApp\src\index.jsx" />
+    <Content Include="ClientApp\src\state\arrangement\actionCreators.js" />
+    <Content Include="ClientApp\src\state\arrangement\actionTypes.js" />
+    <Content Include="ClientApp\src\state\arrangement\reducer.js" />
+    <Content Include="ClientApp\src\state\own\single_part_reducer.js" />
+    <Content Include="ClientApp\src\state\rootReducer.js" />
+    <Content Include="ClientApp\src\state\stage\actionCreators.js" />
+    <Content Include="ClientApp\src\state\stage\actionTypes.js" />
+    <Content Include="ClientApp\src\state\stage\reducer.js" />
+    <Content Include="ClientApp\src\strings.js" />
+    <Content Include="ClientApp\src\styles\cell.css" />
+    <Content Include="ClientApp\src\styles\styles.css" />
+    <Content Include="webpack.config.js" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\dist\bundle.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\App\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\App\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\IndexRow\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\IndexRow\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Index\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Index\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\OwnGrid\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\OwnGrid\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\OwnSquare\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Row\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Row\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\ShipOrientationOption\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\ShipOrientationSelection\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\ShipOrientationSelection\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\ShipTypeOption\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\ShipTypeSelection\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Square\index.jsx" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\components\Square\styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\domain\operations.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\domain\shipOrientations.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\domain\shipTypes.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\domain\squareStates.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\domain\stages.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\index.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\arrangement\actionCreators.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\arrangement\actionTypes.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\arrangement\reducer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\own\single_part_reducer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\rootReducer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\stage\actionCreators.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\stage\actionTypes.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\state\stage\reducer.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\strings.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\styles\cell.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\src\styles\styles.css" />
+  </ItemGroup>
+
+</Project>

@@ -1,9 +1,16 @@
 const path = require('path');
-const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-// todo look for webpack deprecated API checker
+/*todo look for webpack deprecated API checker*/
 module.exports = {
-    entry: ['./src/index.js', './src/styles/styles.css'],
+    entry: {
+        main: [
+            'react-hot-loader/patch',
+            './ClientApp/src/index.jsx',
+            './ClientApp/src/styles/styles.css'
+        ]
+    },
+    /*todo add production build*/
     mode: 'development',
     module: {
         rules: [
@@ -22,21 +29,17 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx'],
         alias: {
-            'react-dom': '@hot-loader/react-dom',
+            'react-dom': '@hot-loader/react-dom'
         }
     },
     output: {
-        path: path.resolve(__dirname, 'dist/'),
-        publicPath: '/dist/',
+        path: path.resolve(__dirname, 'wwwroot/dist/'),
+        publicPath: '/',
         filename: 'bundle.js'
     },
     /*todo remove from production*/
     devtool: 'eval-source-map',
-    devServer: {
-        contentBase: path.join(__dirname, 'public/'),
-        port: 3000,
-        publicPath: 'http://localhost:3000/dist/',
-        hotOnly: true
-    },
-    plugins: [new webpack.HotModuleReplacementPlugin()]
+    plugins: [
+        new CleanWebpackPlugin()
+    ]
 };
