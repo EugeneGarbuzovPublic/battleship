@@ -1,7 +1,7 @@
 ﻿import { ADD_SHIP } from '../arrangement/actionTypes';
 import { takeEvery } from 'redux-saga/effects';
-import arrangementSaga from './arrangementSaga';
+import addShipSaga from './addShipSaga';
 
 export default function* rootSaga() {
-    yield takeEvery(ADD_SHIP, arrangementSaga);
+    yield takeEvery(ADD_SHIP, addShipSaga);
 }
