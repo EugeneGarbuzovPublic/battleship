@@ -6,6 +6,7 @@ namespace Battleship.Controllers
 {
     public class HomeController : Controller
     {
+        /*todo consider using UseDefaultFiles*/
         public IActionResult Index()
         {
             return View();

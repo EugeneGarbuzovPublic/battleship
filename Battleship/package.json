@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "description": "A web version of Battleship game",
     "private": true,
-    "main": "./ClientApp/src/index.js",
+    "main": "./ClientApp/index.js",
     "scripts": {
         "lint": "npx eslint --ext .js,.jsx ClientApp/",
         "lintfix": "npm run lint -- --fix",

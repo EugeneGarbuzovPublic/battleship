@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -9,38 +9,38 @@
 
   <ItemGroup>
     <Content Include=".babelrc" />
-    <Content Include="ClientApp\src\components\App\index.jsx" />
-    <Content Include="ClientApp\src\components\App\styles.css" />
-    <Content Include="ClientApp\src\components\IndexRow\index.jsx" />
-    <Content Include="ClientApp\src\components\IndexRow\styles.css" />
-    <Content Include="ClientApp\src\components\Index\index.jsx" />
-    <Content Include="ClientApp\src\components\Index\styles.css" />
-    <Content Include="ClientApp\src\components\OwnGrid\index.jsx" />
-    <Content Include="ClientApp\src\components\OwnGrid\styles.css" />
-    <Content Include="ClientApp\src\components\OwnSquare\index.jsx" />
-    <Content Include="ClientApp\src\components\Row\index.jsx" />
-    <Content Include="ClientApp\src\components\Row\styles.css" />
-    <Content Include="ClientApp\src\components\ShipOrientationOption\index.jsx" />
-    <Content Include="ClientApp\src\components\ShipOrientationSelection\index.jsx" />
-    <Content Include="ClientApp\src\components\ShipOrientationSelection\styles.css" />
-    <Content Include="ClientApp\src\components\ShipTypeOption\index.jsx" />
-    <Content Include="ClientApp\src\components\ShipTypeSelection\index.jsx" />
-    <Content Include="ClientApp\src\components\Square\index.jsx" />
-    <Content Include="ClientApp\src\components\Square\styles.css" />
-    <Content Include="ClientApp\src\domain\operations.js" />
-    <Content Include="ClientApp\src\domain\shipOrientations.js" />
-    <Content Include="ClientApp\src\domain\shipTypes.js" />
-    <Content Include="ClientApp\src\domain\squareStates.js" />
-    <Content Include="ClientApp\src\domain\stages.js" />
-    <Content Include="ClientApp\src\index.jsx" />
-    <Content Include="ClientApp\src\state\arrangement\actionCreators.js" />
-    <Content Include="ClientApp\src\state\arrangement\actionTypes.js" />
-    <Content Include="ClientApp\src\state\arrangement\reducer.js" />
-    <Content Include="ClientApp\src\state\own\single_part_reducer.js" />
-    <Content Include="ClientApp\src\state\rootReducer.js" />
-    <Content Include="ClientApp\src\strings.js" />
-    <Content Include="ClientApp\src\styles\cell.css" />
-    <Content Include="ClientApp\src\styles\styles.css" />
+    <Content Include="ClientApp\components\App\index.jsx" />
+    <Content Include="ClientApp\components\App\styles.css" />
+    <Content Include="ClientApp\components\IndexRow\index.jsx" />
+    <Content Include="ClientApp\components\IndexRow\styles.css" />
+    <Content Include="ClientApp\components\Index\index.jsx" />
+    <Content Include="ClientApp\components\Index\styles.css" />
+    <Content Include="ClientApp\components\OwnGrid\index.jsx" />
+    <Content Include="ClientApp\components\OwnGrid\styles.css" />
+    <Content Include="ClientApp\components\OwnSquare\index.jsx" />
+    <Content Include="ClientApp\components\Row\index.jsx" />
+    <Content Include="ClientApp\components\Row\styles.css" />
+    <Content Include="ClientApp\components\ShipOrientationOption\index.jsx" />
+    <Content Include="ClientApp\components\ShipOrientationSelection\index.jsx" />
+    <Content Include="ClientApp\components\ShipOrientationSelection\styles.css" />
+    <Content Include="ClientApp\components\ShipTypeOption\index.jsx" />
+    <Content Include="ClientApp\components\ShipTypeSelection\index.jsx" />
+    <Content Include="ClientApp\components\Square\index.jsx" />
+    <Content Include="ClientApp\components\Square\styles.css" />
+    <Content Include="ClientApp\domain\operations.js" />
+    <Content Include="ClientApp\domain\shipOrientations.js" />
+    <Content Include="ClientApp\domain\shipTypes.js" />
+    <Content Include="ClientApp\domain\squareStates.js" />
+    <Content Include="ClientApp\domain\stages.js" />
+    <Content Include="ClientApp\index.jsx" />
+    <Content Include="ClientApp\state\arrangement\actionCreators.js" />
+    <Content Include="ClientApp\state\arrangement\actionTypes.js" />
+    <Content Include="ClientApp\state\arrangement\reducer.js" />
+    <Content Include="ClientApp\state\own\single_part_reducer.js" />
+    <Content Include="ClientApp\state\rootReducer.js" />
+    <Content Include="ClientApp\strings.js" />
+    <Content Include="ClientApp\styles\cell.css" />
+    <Content Include="ClientApp\styles\styles.css" />
     <Content Include="webpack.config.js" />
   </ItemGroup>
 

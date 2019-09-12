@@ -7,8 +7,8 @@ module.exports = {
         main: [
             'react-hot-loader/patch',
             'regenerator-runtime/runtime',
-            './ClientApp/src/index.jsx',
-            './ClientApp/src/styles/styles.css'
+            './ClientApp/index.jsx',
+            './ClientApp/styles/styles.css'
         ]
     },
     /*todo add production build*/
