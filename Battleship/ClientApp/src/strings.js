@@ -1,5 +1,6 @@
 /*todo implement localization*/
 export default {
     horizontally: 'Горизонтально',
-    vertically: 'Вертикально'
-}
+    vertically: 'Вертикально',
+    waitingForOpponent: 'Ожидание оппонента'
+};

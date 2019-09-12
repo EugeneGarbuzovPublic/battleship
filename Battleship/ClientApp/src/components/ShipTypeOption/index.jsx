@@ -21,7 +21,7 @@ function ShipTypeOption(props) {
 
 export default connect(
     state => ({
-        shipType: state.arrangement.shipType
+        shipType: state.shipType
     }),
     dispatch => ({
         setShipType: type => dispatch(setShipType(type))

@@ -1,4 +1,10 @@
-import { SET_SHIP_TYPE, ADD_SHIP, SET_SHIP_ORIENTATION } from './actionTypes';
+import {
+    ADD_SHIP,
+    SET_SHIP_ORIENTATION,
+    SET_SHIP_TYPE,
+    SET_WAITING_STAGE,
+    SHIP_ADDED
+} from './actionTypes';
 
 export function setShipType(shipType) {
     return {
@@ -19,5 +25,18 @@ export function addShip(horizontalIndex, verticalIndex) {
         type: ADD_SHIP,
         horizontalIndex,
         verticalIndex
+    };
+}
+
+export function shipAdded(arrangementState) {
+    return {
+        type: SHIP_ADDED,
+        arrangementState
+    };
+}
+
+export function setWaitingStage() {
+    return {
+        type: SET_WAITING_STAGE
     };
 }

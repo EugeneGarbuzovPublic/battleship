@@ -6,7 +6,7 @@ import strings from '../../strings';
 
 const labelKeys = {
     [shipOrientations.HORIZONTAL]: 'horizontally',
-    [shipOrientations.VERTICAL]: 'vertically',
+    [shipOrientations.VERTICAL]: 'vertically'
 };
 
 function ShipOrientationOption(props) {
@@ -28,7 +28,7 @@ function ShipOrientationOption(props) {
 
 export default connect(
     state => ({
-        shipOrientation: state.arrangement.shipOrientation
+        shipOrientation: state.shipOrientation
     }),
     dispatch => ({
         setShipOrientation:

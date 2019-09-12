@@ -4,22 +4,22 @@ import classNames from 'classnames';
 import squareStates from '../../domain/squareStates';
 
 export default function Square(props) {
-	const className = classNames({
-		square: true,
-		'intact-ship-part': props.state === squareStates.INTACT_SHIP_PART,
-		/*todo remove disabled*/
-		disabled: props.disabled
-	});
+    const className = classNames({
+        square: true,
+        'intact-ship-part': props.state === squareStates.INTACT_SHIP_PART,
+        /*todo remove disabled*/
+        disabled: props.disabled
+    });
 
-	const onClick = () => {
-		if (props.disabled) {
-			return;
-		}
+    const onClick = () => {
+        if (props.disabled) {
+            return;
+        }
 
-		props.onClick();
-	};
+        props.onClick();
+    };
 
-	return (
-		<div className={className} onClick={onClick} />
-	);
+    return (
+        <div className={className} onClick={onClick} />
+    );
 }

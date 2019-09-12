@@ -6,6 +6,7 @@ module.exports = {
     entry: {
         main: [
             'react-hot-loader/patch',
+            'regenerator-runtime/runtime',
             './ClientApp/src/index.jsx',
             './ClientApp/src/styles/styles.css'
         ]
@@ -17,7 +18,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules)/,
-                use: ['babel-loader']
+                use: ['babel-loader', 'eslint-loader']
             },
             {
                 test: /\.css$/,

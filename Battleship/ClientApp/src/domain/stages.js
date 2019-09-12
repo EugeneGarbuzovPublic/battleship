@@ -1,3 +1,4 @@
 export default {
-    ARRANGEMENT: 'arrangement'
+    ARRANGEMENT: 'ARRANGEMENT',
+    WAITING: 'WAITING'
 };

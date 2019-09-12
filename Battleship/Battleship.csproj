@@ -38,9 +38,6 @@
     <Content Include="ClientApp\src\state\arrangement\reducer.js" />
     <Content Include="ClientApp\src\state\own\single_part_reducer.js" />
     <Content Include="ClientApp\src\state\rootReducer.js" />
-    <Content Include="ClientApp\src\state\stage\actionCreators.js" />
-    <Content Include="ClientApp\src\state\stage\actionTypes.js" />
-    <Content Include="ClientApp\src\state\stage\reducer.js" />
     <Content Include="ClientApp\src\strings.js" />
     <Content Include="ClientApp\src\styles\cell.css" />
     <Content Include="ClientApp\src\styles\styles.css" />

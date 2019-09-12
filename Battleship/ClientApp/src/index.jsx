@@ -2,16 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { hot } from 'react-hot-loader/root';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './state/rootReducer';
+import createSagaMiddleware from 'redux-saga';
 import App from './components/App';
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootSaga from './state/sagas/rootSaga';
+
+const composeEnhancers = composeWithDevTools({});
+
+const sagaMiddleware = createSagaMiddleware();
 
 /*todo add redux-devtools to applyMiddleware*/
 const store = createStore(
     rootReducer,
-    devToolsEnhancer()
+    composeEnhancers(applyMiddleware(sagaMiddleware))
 );
+
+sagaMiddleware.run(rootSaga);
 
 /*todo write it in a better way*/
 const StoredApp = () => (

@@ -5,10 +5,9 @@ import './styles.css';
 import stages from '../../domain/stages';
 import ShipTypeSelection from '../ShipTypeSelection';
 import ShipOrientationSelection from '../ShipOrientationSelection';
+import WaitingMessage from '../WaitingMessage';
 
 /*todo global tests*/
-/*todo global ESLint, VS support*/
-/*todo global redux-saga*/
 /*todo global react-router*/
 /*todo global logging*/
 /*todo global ImmutableJS*/
@@ -21,21 +20,14 @@ import ShipOrientationSelection from '../ShipOrientationSelection';
 function App(props) {
     /*todo add clear/undo buttons during arrangement*/
 
-    /*todo extract component to file*/
-    const OpponentGridPlace = (
-        <div className="grid-place">
-            <OwnGrid />
-        </div>
-    );
-
     return (
         <div>
+            {props.stage === stages.WAITING && <WaitingMessage />}
             {/*todo extract component to file*/}
             <div className="grid-place">
                 <OwnGrid />
             </div>
             {/*todo optimize conditions*/}
-            {props.stage !== stages.ARRANGEMENT && <OpponentGridPlace />}
             {props.stage === stages.ARRANGEMENT && (
                 <>
                     <ShipTypeSelection />
@@ -49,7 +41,7 @@ function App(props) {
 const ConnectedApp = connect(
     state => ({
         stage: state.stage,
-        shipType: state.arrangement.shipType
+        shipType: state.shipType
     })
 )(App);
 

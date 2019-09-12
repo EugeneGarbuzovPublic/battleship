@@ -1,13 +1,18 @@
 import shipTypes from '../../domain/shipTypes';
-import { SET_SHIP_ORIENTATION, SET_SHIP_TYPE } from './actionTypes';
+import {
+    SET_SHIP_ORIENTATION,
+    SET_SHIP_TYPE,
+    SET_WAITING_STAGE,
+    SHIP_ADDED
+} from './actionTypes';
 import squareStates from '../../domain/squareStates';
-import { ADD_SHIP } from './actionTypes';
 import shipOrientations from '../../domain/shipOrientations';
-import { addShip } from '../../domain/operations';
+import stages from '../../domain/stages';
 
 
 const initialState = {
     /*todo move game settings to domain*/
+    stage: stages.ARRANGEMENT,
     shipType: shipTypes.reverse()[0],
     shipOrientation: shipOrientations.HORIZONTAL,
     grid: new Array(10).fill(new Array(10).fill(squareStates.EMPTY)),
@@ -15,15 +20,13 @@ const initialState = {
         1: 4,
         2: 3,
         3: 2,
-        4: 1,
+        4: 1
     }
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_SHIP_TYPE:
-            /*todo check*/
-            /*todo log*/
             /*todo do not set state if not arrangement*/
             if (!shipTypes.includes(action.shipType)) {
                 return state;
@@ -43,21 +46,12 @@ export default function (state = initialState, action) {
                 ...state,
                 shipOrientation: action.shipOrientation
             };
-        case ADD_SHIP:
-            const gameState = {
-                grid: state.grid,
-                shipsToArrange: state.shipsToArrange
-            };
-            const ship = {
-                type: state.shipType,
-                orientation: state.shipOrientation,
-                x: action.horizontalIndex,
-                y: action.verticalIndex
-            };
-            const newGameState = addShip(gameState, ship);
+        case SHIP_ADDED:
+            return action.arrangementState;
+        case SET_WAITING_STAGE:
             return {
-                ...state,
-                ...newGameState
+                grid: state.grid,
+                stage: stages.WAITING
             };
         default:
             return state;
