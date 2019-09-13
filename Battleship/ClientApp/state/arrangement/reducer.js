@@ -4,12 +4,13 @@ import {
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
     SET_WAITING_STAGE,
-    SHIP_ADDED
+    ADD_SHIP
 } from './actionTypes';
 import { EMPTY } from '../../domain/squareStates';
 import shipOrientations from '../../domain/shipOrientations';
 import { ARRANGEMENT, MAX_PLAYERS, WAITING } from '../../domain/stages';
 import strings from '../../strings';
+import { addShip } from '../../domain/operations';
 
 
 const initialState = {
@@ -48,8 +49,21 @@ export default function (state = initialState, action) {
                 ...state,
                 shipOrientation: action.shipOrientation
             };
-        case SHIP_ADDED:
-            return action.arrangementState;
+        case ADD_SHIP:
+            const gameState = {
+                grid: state.grid,
+                shipsToArrange: state.shipsToArrange
+            };
+            const ship = {
+                type: state.shipType,
+                orientation: state.shipOrientation,
+                x: action.horizontalIndex,
+                y: action.verticalIndex
+            };
+            return {
+                ...state,
+                ...addShip(gameState, ship)
+            };
         case SET_WAITING_STAGE:
             return {
                 grid: state.grid,

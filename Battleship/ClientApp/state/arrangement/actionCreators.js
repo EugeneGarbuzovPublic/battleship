@@ -3,8 +3,7 @@ import {
     SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
-    SET_WAITING_STAGE,
-    SHIP_ADDED
+    SET_WAITING_STAGE
 } from './actionTypes';
 
 export function setShipType(shipType) {
@@ -26,13 +25,6 @@ export function addShip(horizontalIndex, verticalIndex) {
         type: ADD_SHIP,
         horizontalIndex,
         verticalIndex
-    };
-}
-
-export function shipAdded(arrangementState) {
-    return {
-        type: SHIP_ADDED,
-        arrangementState
     };
 }
 

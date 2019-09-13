@@ -9,7 +9,8 @@ namespace Battleship.Hubs
     public class BattleshipHub : Hub
     {
         /*todo move into a game entity*/
-        private static readonly List<string> _players = new List<string>(2);
+        private static readonly List<string> _players
+            = new List<string>(BattleshipGame.MaxPlayersCount);
 
         public async Task ArrangeGrid(int[][] shipCells)
         {
