@@ -14,7 +14,7 @@ import { addShip } from '../../domain/operations';
 
 
 const initialState = {
-    /*todo move game settings to domain*/
+    /*todo battleship move game settings to domain*/
     stage: ARRANGEMENT,
     shipType: shipTypes.reverse()[0],
     shipOrientation: shipOrientations.HORIZONTAL,
@@ -30,7 +30,7 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_SHIP_TYPE:
-            /*todo do not set state if not arrangement*/
+            /*todo battleship do not set state if not arrangement*/
             if (!shipTypes.includes(action.shipType)) {
                 return state;
             }
@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
                 ...state,
                 shipType: action.shipType
             };
-        /*todo consider merging with SET_SHIP_TYPE*/
+        /*todo battleship consider merging with SET_SHIP_TYPE*/
         case SET_SHIP_ORIENTATION:
             if (!(action.shipOrientation in shipOrientations)) {
                 return state;

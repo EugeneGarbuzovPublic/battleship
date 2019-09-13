@@ -7,7 +7,7 @@ export default function Square(props) {
     const className = classNames({
         square: true,
         'intact-ship-part': props.state === INTACT_SHIP_PART,
-        /*todo remove disabled*/
+        /*todo battleship remove disabled*/
         disabled: props.disabled
     });
 

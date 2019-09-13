@@ -8,13 +8,13 @@ namespace Battleship.Hubs
 {
     public class BattleshipHub : Hub
     {
-        /*todo move into a game entity*/
+        /*todo battleship move into a game entity*/
         private static readonly List<string> _players
             = new List<string>(BattleshipGame.MaxPlayersCount);
 
         public async Task ArrangeGrid(int[][] shipCells)
         {
-            /*todo continue*/
+            /*todo battleship continue*/
         }
 
         public override async Task OnConnectedAsync()

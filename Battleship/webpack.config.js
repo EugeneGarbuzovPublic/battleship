@@ -1,7 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-/*todo look for webpack deprecated API checker*/
+/*todo battleship look for webpack deprecated API checker*/
 module.exports = {
     entry: {
         main: [
@@ -11,7 +11,7 @@ module.exports = {
             './ClientApp/styles/styles.css'
         ]
     },
-    /*todo add production build*/
+    /*todo battleship add production build*/
     mode: 'development',
     module: {
         rules: [
@@ -38,7 +38,7 @@ module.exports = {
         publicPath: '/',
         filename: 'bundle.js'
     },
-    /*todo remove from production*/
+    /*todo battleship remove from production*/
     devtool: 'eval-source-map',
     plugins: [
         new CleanWebpackPlugin()

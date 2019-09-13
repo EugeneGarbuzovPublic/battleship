@@ -1,8 +1,8 @@
 import { ADD_SHIP } from './actionTypes';
 import { EMPTY, INTACT_SHIP_PART } from '../../domain/squareStates';
 
-/*todo add arrangement modes (drag'n'drop)*/
-/*todo consider removing*/
+/*todo battleship add arrangement modes (drag'n'drop)*/
+/*todo battleship consider removing*/
 
 const initialGrid = new Array(10).fill(new Array(10).fill(EMPTY));
 
@@ -37,7 +37,7 @@ function addShipPart(grid, x, y) {
         }
     }
 
-    /*todo continue: fix these cases*/
+    /*todo battleship continue: fix these cases*/
     if (x - 1 >= 0 && x + 1 <= 9
         && grid[x - 1][y] !== EMPTY
         && grid[x + 1][y] !== EMPTY) {

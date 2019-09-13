@@ -1,4 +1,4 @@
-/*todo implement localization*/
+/*todo battleship implement localization*/
 export default {
     horizontally: 'Горизонтально',
     vertically: 'Вертикально',

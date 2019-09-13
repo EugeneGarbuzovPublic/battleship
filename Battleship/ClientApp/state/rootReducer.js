@@ -1,4 +1,4 @@
 import arrangement from './arrangement/reducer';
 
-/*todo rearrange reducers*/
+/*todo battleship rearrange reducers*/
 export default arrangement;

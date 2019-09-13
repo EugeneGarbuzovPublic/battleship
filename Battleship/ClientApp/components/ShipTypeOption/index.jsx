@@ -11,10 +11,10 @@ function ShipTypeOption(props) {
                    onChange={() => props.setShipType(props.type)}
                    value={props.type} checked={props.type === props.shipType} />
             <label htmlFor={id}>
-                {/*todo localizable*/}
+                {/*todo battleship localizable*/}
                 {props.type}
             </label>
-            {/*todo remaining ships number*/}
+            {/*todo battleship remaining ships number*/}
         </div>
     );
 }

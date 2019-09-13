@@ -75,7 +75,7 @@ module.exports = {
             'error',
             'first'
         ],
-        /*todo enable*/
+        /*todo battleship enable*/
         'react/prop-types': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error'

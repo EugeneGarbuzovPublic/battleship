@@ -23,7 +23,7 @@ function getShipPoints(ship, getShipPoint) {
 
 function checkShipPoints(grid, shipPoints) {
     return shipPoints.every(point =>
-        /*todo move game settings to domain*/
+        /*todo battleship move game settings to domain*/
         point.x >= 0 && point.x <= 9 &&
         point.y >= 0 && point.y <= 9 &&
         grid[point.x][point.y] === EMPTY
@@ -82,7 +82,7 @@ function getVerticalShipSurroundings(ship) {
 
 function checkSurroundings(grid, surroundings) {
     return surroundings.every(point =>
-        /*todo move game settings to domain*/
+        /*todo battleship move game settings to domain*/
         point.x < 0 || point.x > 9 ||
         point.y < 0 || point.y > 9 ||
         grid[point.x][point.y] === EMPTY
