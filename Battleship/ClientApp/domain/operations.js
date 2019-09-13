@@ -1,5 +1,5 @@
 import shipOrientations from './shipOrientations';
-import squareStates from './squareStates';
+import { EMPTY, INTACT_SHIP_PART } from './squareStates';
 
 function getHorizontalShipPoint(ship, index) {
     return {
@@ -26,7 +26,7 @@ function checkShipPoints(grid, shipPoints) {
         /*todo move game settings to domain*/
         point.x >= 0 && point.x <= 9 &&
         point.y >= 0 && point.y <= 9 &&
-        grid[point.x][point.y] === squareStates.EMPTY
+        grid[point.x][point.y] === EMPTY
     );
 }
 
@@ -85,7 +85,7 @@ function checkSurroundings(grid, surroundings) {
         /*todo move game settings to domain*/
         point.x < 0 || point.x > 9 ||
         point.y < 0 || point.y > 9 ||
-        grid[point.x][point.y] === squareStates.EMPTY
+        grid[point.x][point.y] === EMPTY
     );
 }
 
@@ -93,7 +93,7 @@ function addHorizontalShipToGrid(grid, ship) {
     const newGrid = [...grid];
     for (let i = 0; i < ship.type; i++) {
         const newColumn = [...grid[ship.x + i]];
-        newColumn[ship.y] = squareStates.INTACT_SHIP_PART;
+        newColumn[ship.y] = INTACT_SHIP_PART;
         newGrid[ship.x + i] = newColumn;
     }
     return newGrid;
@@ -103,7 +103,7 @@ function addVerticalShipToGrid(grid, ship) {
     const newGrid = [...grid];
     const newColumn = [...grid[ship.x]];
     for (let i = 0; i < ship.type; i++) {
-        newColumn[ship.y + i] = squareStates.INTACT_SHIP_PART;
+        newColumn[ship.y + i] = INTACT_SHIP_PART;
     }
     newGrid[ship.x] = newColumn;
     return newGrid;

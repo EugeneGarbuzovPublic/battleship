@@ -2,7 +2,10 @@
 import { addShip as addShipToGameState } from '../../domain/operations';
 import { setWaitingStage, shipAdded } from '../arrangement/actionCreators';
 import shipTypes from '../../domain/shipTypes';
+import connection from '../../services/connection';
+import { getShipCells } from '../../utils';
 
+/*todo move most logic to reducer*/
 function* addShip(state, action) {
     const gameState = {
         grid: state.grid,
@@ -37,5 +40,7 @@ export default function* (action) {
         shipTypes.every(type => shipsToArrange[type] === 0);
     if (noMoreShipsToArrange) {
         yield put(setWaitingStage());
+        const shipCells = getShipCells(newArrangementState.grid);
+        yield call([connection, 'send'], 'arrangeGrid', shipCells);
     }
 }

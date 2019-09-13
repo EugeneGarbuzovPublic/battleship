@@ -2,5 +2,6 @@
 export default {
     horizontally: 'Горизонтально',
     vertically: 'Вертикально',
-    waitingForOpponent: 'Ожидание оппонента'
+    waitingForOpponent: 'Ожидание оппонента',
+    maxPlayers: 'Достигнуто максимальное количество игроков'
 };

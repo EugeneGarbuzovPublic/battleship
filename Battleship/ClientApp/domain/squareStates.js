@@ -1,4 +1,2 @@
-export default {
-    EMPTY: 'EMPTY',
-    INTACT_SHIP_PART: 'INTACT_SHIP_PART'
-};
+export const EMPTY = 'EMPTY';
+export const INTACT_SHIP_PART = 'INTACT_SHIP_PART';

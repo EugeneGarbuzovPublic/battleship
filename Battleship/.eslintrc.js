@@ -63,6 +63,14 @@ module.exports = {
             'error',
             'always'
         ],
+        'object-curly-newline': [
+            'error',
+            {
+                'ObjectExpression': {
+                    'minProperties': 1
+                }
+            }
+        ],
         'react/jsx-indent-props': [
             'error',
             'first'

@@ -1,24 +1,24 @@
 import { ADD_SHIP } from './actionTypes';
-import squareStates from '../../domain/squareStates';
+import { EMPTY, INTACT_SHIP_PART } from '../../domain/squareStates';
 
 /*todo add arrangement modes (drag'n'drop)*/
 /*todo consider removing*/
 
-const initialGrid = new Array(10).fill(new Array(10).fill(squareStates));
+const initialGrid = new Array(10).fill(new Array(10).fill(EMPTY));
 
 function addShipPart(grid, x, y) {
-    if (grid[x][y] !== squareStates.EMPTY) {
+    if (grid[x][y] !== EMPTY) {
         return grid;
     }
 
     if (x - 1 >= 0) {
         if (y - 1 >= 0) {
-            if (grid[x - 1][y - 1] !== squareStates.EMPTY) {
+            if (grid[x - 1][y - 1] !== EMPTY) {
                 return grid;
             }
         }
         if (y + 1 <= 9) {
-            if (grid[x - 1][y + 1] !== squareStates.EMPTY) {
+            if (grid[x - 1][y + 1] !== EMPTY) {
                 return grid;
             }
         }
@@ -26,12 +26,12 @@ function addShipPart(grid, x, y) {
 
     if (x + 1 <= 9) {
         if (y - 1 >= 0) {
-            if (grid[x + 1][y - 1] !== squareStates.EMPTY) {
+            if (grid[x + 1][y - 1] !== EMPTY) {
                 return grid;
             }
         }
         if (y + 1 <= 9) {
-            if (grid[x + 1][y + 1] !== squareStates.EMPTY) {
+            if (grid[x + 1][y + 1] !== EMPTY) {
                 return grid;
             }
         }
@@ -39,19 +39,19 @@ function addShipPart(grid, x, y) {
 
     /*todo continue: fix these cases*/
     if (x - 1 >= 0 && x + 1 <= 9
-        && grid[x - 1][y] !== squareStates.EMPTY
-        && grid[x + 1][y] !== squareStates.EMPTY) {
+        && grid[x - 1][y] !== EMPTY
+        && grid[x + 1][y] !== EMPTY) {
         return grid;
     }
 
     if (y - 1 >= 0 && y + 1 <= 9
-        && grid[x][y - 1] !== squareStates.EMPTY
-        && grid[x][y + 1] !== squareStates.EMPTY) {
+        && grid[x][y - 1] !== EMPTY
+        && grid[x][y + 1] !== EMPTY) {
         return grid;
     }
 
     const newRow = [...grid[x]];
-    newRow[x][y] = squareStates.INTACT_SHIP_PART;
+    newRow[x][y] = INTACT_SHIP_PART;
     const newGrid = [...grid];
     newGrid[x] = newRow;
     return newGrid;

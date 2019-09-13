@@ -1,4 +1,3 @@
-export default {
-    ARRANGEMENT: 'ARRANGEMENT',
-    WAITING: 'WAITING'
-};
+export const MAX_PLAYERS = 'MAX_PLAYERS';
+export const ARRANGEMENT = 'ARRANGEMENT';
+export const WAITING = 'WAITING';

@@ -1,5 +1,6 @@
 import {
     ADD_SHIP,
+    SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
     SET_WAITING_STAGE,
@@ -38,5 +39,11 @@ export function shipAdded(arrangementState) {
 export function setWaitingStage() {
     return {
         type: SET_WAITING_STAGE
+    };
+}
+
+export function setMaxPlayers() {
+    return {
+        type: SET_MAX_PLAYERS
     };
 }
