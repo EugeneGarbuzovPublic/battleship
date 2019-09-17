@@ -6,6 +6,7 @@ import { ARRANGEMENT, MAX_PLAYERS } from '../../domain/stages';
 import ShipTypeSelection from '../ShipTypeSelection';
 import ShipOrientationSelection from '../ShipOrientationSelection';
 import Notification from '../Notification';
+import TurnIndicator from '../TurnIndicator';
 
 /*todo battleship global ErrorBoundary*/
 /*todo battleship global tests*/
@@ -28,6 +29,7 @@ function App(props) {
             {/*todo battleship prevent grid from showing
              * before max players number message*/}
             <Notification />
+            <TurnIndicator />
             {props.stage !== MAX_PLAYERS && (
                 /*todo battleship extract component to file*/
                 <div className="grid-place">

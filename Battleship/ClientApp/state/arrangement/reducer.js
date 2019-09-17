@@ -1,14 +1,15 @@
 import shipTypes from '../../domain/shipTypes';
 import {
+    ADD_SHIP,
+    SET_BATTLE,
     SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
-    SET_WAITING_STAGE,
-    ADD_SHIP
+    SET_WAITING_STAGE
 } from './actionTypes';
 import { EMPTY } from '../../domain/squareStates';
 import shipOrientations from '../../domain/shipOrientations';
-import { ARRANGEMENT, MAX_PLAYERS, WAITING } from '../../domain/stages';
+import { ARRANGEMENT, BATTLE, MAX_PLAYERS, WAITING } from '../../domain/stages';
 import strings from '../../strings';
 import { addShip } from '../../domain/operations';
 
@@ -50,6 +51,10 @@ export default function (state = initialState, action) {
                 shipOrientation: action.shipOrientation
             };
         case ADD_SHIP:
+            if (state.stage !== ARRANGEMENT) {
+                return state;
+            }
+
             const gameState = {
                 grid: state.grid,
                 shipsToArrange: state.shipsToArrange
@@ -74,6 +79,12 @@ export default function (state = initialState, action) {
             return {
                 stage: MAX_PLAYERS,
                 notification: strings.maxPlayers
+            };
+        case SET_BATTLE:
+            return {
+                stage: BATTLE,
+                grid: state.grid,
+                isTurn: action.isTurn
             };
         default:
             return state;

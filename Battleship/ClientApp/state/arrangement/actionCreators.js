@@ -1,5 +1,6 @@
 import {
     ADD_SHIP,
+    SET_BATTLE,
     SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
@@ -37,5 +38,12 @@ export function setWaitingStage() {
 export function setMaxPlayers() {
     return {
         type: SET_MAX_PLAYERS
+    };
+}
+
+export function setBattle(isTurn) {
+    return {
+        type: SET_BATTLE,
+        isTurn
     };
 }

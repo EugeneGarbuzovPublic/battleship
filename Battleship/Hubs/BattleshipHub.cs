@@ -1,41 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Battleship.Models;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Battleship.Hubs
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class BattleshipHub : Hub
     {
-        /*todo battleship move into a game entity*/
-        private static readonly List<string> _players
-            = new List<string>(BattleshipGame.MaxPlayersCount);
+        private static readonly BattleshipGame Game = new BattleshipGame();
 
-        public async Task ArrangeGrid(int[][] shipCells)
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        public async Task ArrangeGrid(IEnumerable<int[]> shipCells)
         {
-            /*todo battleship continue*/
+            Game.ArrangeShips(Context.ConnectionId, shipCells);
+            if (Game.AreShipsArranged)
+            {
+                var currentPlayerId = Game.CurrentPlayerId;
+                const string methodName = "ShipsArranged";
+                await Clients.Client(currentPlayerId)
+                    .SendAsync(methodName, true);
+                await Clients.AllExcept(currentPlayerId)
+                    .SendAsync(methodName, false);
+            }
         }
 
         public override async Task OnConnectedAsync()
         {
-            if (_players.Count < BattleshipGame.MaxPlayersCount)
-            {
-                _players.Add(Context.ConnectionId);
-            }
-            else
+            if (!Game.AddPlayer(Context.ConnectionId))
             {
                 await Clients.Caller.SendAsync("MaxPlayers");
             }
+
             await base.OnConnectedAsync();
         }
 
         public override async Task OnDisconnectedAsync(Exception exception)
         {
-            if (_players.Contains(Context.ConnectionId))
-            {
-                _players.Remove(Context.ConnectionId);
-            }
+            Game.RemovePlayer(Context.ConnectionId);
             await base.OnDisconnectedAsync(exception);
         }
     }
