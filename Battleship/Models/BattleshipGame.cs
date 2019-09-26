@@ -26,7 +26,7 @@ namespace Battleship.Models
 
         public bool AddPlayer(string id)
         {
-            if (_playersGrids.Count == RequiredPlayersCount)
+            if (_playersGrids.Count >= RequiredPlayersCount)
             {
                 return false;
             }

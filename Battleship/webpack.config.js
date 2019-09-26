@@ -1,7 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-/*todo battleship look for webpack deprecated API checker*/
+/*todo battleship look for deprecated webpack API checker*/
 module.exports = {
     entry: {
         main: [

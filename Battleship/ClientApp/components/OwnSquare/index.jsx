@@ -6,7 +6,6 @@ import { addShip } from '../../state/arrangement/actionCreators';
 export default connect(
     (state, ownProps) => ({
         shipType: state.shipType,
-        /*todo battleship move grid from arrangement to global state*/
         state: state.grid[ownProps.horizontalIndex][ownProps.verticalIndex]
     }),
     (dispatch, ownProps) => ({

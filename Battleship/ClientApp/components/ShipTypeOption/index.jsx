@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setShipType } from '../../state/arrangement/actionCreators';
 
+/*todo remove margin between radiobutton and label*/
 function ShipTypeOption(props) {
     const id = `type_${props.type}`;
 

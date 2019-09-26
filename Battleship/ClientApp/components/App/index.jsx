@@ -26,7 +26,7 @@ function App(props) {
 
     return (
         <div>
-            {/*todo battleship prevent grid from showing
+            {/*todo battleship prevent grid from being shown
              * before max players number message*/}
             <Notification />
             <TurnIndicator />

@@ -1,4 +1,4 @@
-namespace Battleship.Models
+﻿namespace Battleship.Models
 {
     public enum SquareState
     {
