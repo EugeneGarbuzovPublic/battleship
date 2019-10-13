@@ -71,6 +71,17 @@ module.exports = {
                 }
             }
         ],
+        'prefer-destructuring': [
+            'error',
+            {
+                'VariableDeclarator': {
+                    'object': true
+                },
+                'AssignmentExpression': {
+                    'object': true
+                }
+            }
+        ],
         'react/jsx-indent-props': [
             'error',
             'first'
