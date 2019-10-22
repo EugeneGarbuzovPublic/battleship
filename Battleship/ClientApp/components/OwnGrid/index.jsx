@@ -1,23 +1,9 @@
 import React from 'react';
-import './styles.css';
-import Row from '../Row';
-import IndexRow from '../IndexRow';
+import Grid from '../Grid';
+import OwnSquare from '../OwnSquare';
 
-export default function OwnGrid(props) {
-    const rows = new Array(10).fill(0).map((rowElement, rowIndex) => {
-        return (
-            /*todo battleship consider removing disabled prop*/
-            /*todo battleship consider implementing disabled passing via
-               context*/
-            <Row key={rowIndex} index={rowIndex} disabled={props.disabled} />
-        );
-    });
-
+export default function OwnGrid() {
     return (
-        <div className="grid">
-            <IndexRow position="top" />
-            {rows}
-            <IndexRow position="bottom" />
-        </div>
+        <Grid Square={OwnSquare} />
     );
 }

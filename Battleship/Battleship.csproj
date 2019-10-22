@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\components\EnemySquare\index.jsx" />
+    <None Remove="ClientApp\components\OwnGrid\index.jsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include=".babelrc" />
     <Content Include="ClientApp\components\App\index.jsx" />
     <Content Include="ClientApp\components\App\styles.css" />
@@ -15,8 +20,10 @@
     <Content Include="ClientApp\components\IndexRow\styles.css" />
     <Content Include="ClientApp\components\Index\index.jsx" />
     <Content Include="ClientApp\components\Index\styles.css" />
+    <Content Include="ClientApp\components\Grid\index.jsx" />
+    <Content Include="ClientApp\components\Grid\styles.css" />
+    <Content Include="ClientApp\components\EnemySquare\index.jsx" />
     <Content Include="ClientApp\components\OwnGrid\index.jsx" />
-    <Content Include="ClientApp\components\OwnGrid\styles.css" />
     <Content Include="ClientApp\components\OwnSquare\index.jsx" />
     <Content Include="ClientApp\components\Row\index.jsx" />
     <Content Include="ClientApp\components\Row\styles.css" />
@@ -36,7 +43,7 @@
     <Content Include="ClientApp\state\arrangement\actionCreators.js" />
     <Content Include="ClientApp\state\arrangement\actionTypes.js" />
     <Content Include="ClientApp\state\arrangement\reducer.js" />
-    <Content Include="ClientApp\state\own\single_part_reducer.js" />
+    <Content Include="ClientApp\state\own\singlePartReducer.js" />
     <Content Include="ClientApp\state\rootReducer.js" />
     <Content Include="ClientApp\strings.js" />
     <Content Include="ClientApp\styles\cell.css" />

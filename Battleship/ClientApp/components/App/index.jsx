@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import OwnGrid from '../OwnGrid';
 import './styles.css';
-import { ARRANGEMENT, MAX_PLAYERS } from '../../domain/stages';
+import { ARRANGEMENT, MAX_PLAYERS, BATTLE } from '../../domain/stages';
 import ShipTypeSelection from '../ShipTypeSelection';
 import ShipOrientationSelection from '../ShipOrientationSelection';
 import Notification from '../Notification';
 import TurnIndicator from '../TurnIndicator';
+import EnemyGrid from '../EnemyGrid';
 
 /*todo battleship global ErrorBoundary*/
 /*todo battleship global tests*/
@@ -34,6 +35,9 @@ function App(props) {
                 /*todo battleship extract component to file*/
                 <div className="grid-place">
                     <OwnGrid />
+                    {props.stage === BATTLE && (
+                        <EnemyGrid />
+                    )}
                 </div>
             )}
             {/*todo battleship optimize conditions*/}

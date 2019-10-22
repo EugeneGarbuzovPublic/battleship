@@ -4,7 +4,8 @@ import {
     SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
-    SET_WAITING_STAGE
+    SET_WAITING_STAGE,
+    SHOOT
 } from './actionTypes';
 
 export function setShipType(shipType) {
@@ -45,5 +46,13 @@ export function setBattle(isTurn) {
     return {
         type: SET_BATTLE,
         isTurn
+    };
+}
+
+export function shoot(horizontalIndex, verticalIndex) {
+    return {
+        type: SHOOT,
+        horizontalIndex,
+        verticalIndex
     };
 }

@@ -10,6 +10,7 @@ namespace Battleship.Models
 
         private static int GridSize => 10;
 
+        // todo battleship consider optimizing for 2 players
         private readonly List<PlayerGrid> _playersGrids =
             new List<PlayerGrid>(RequiredPlayersCount);
 
@@ -19,6 +20,10 @@ namespace Battleship.Models
             _currentPlayerIndex.HasValue
                 ? _playersGrids[_currentPlayerIndex.Value].PlayerId
                 : null;
+
+        private IEnumerable<PlayerGrid> EnemyGrids =>
+            _playersGrids
+                .Where(g => g.PlayerId != CurrentPlayerId);
 
         public bool AreShipsArranged =>
             _playersGrids.Count == RequiredPlayersCount &&
@@ -64,8 +69,10 @@ namespace Battleship.Models
             var grid = new SquareState[GridSize, GridSize];
             foreach (var shipSquare in shipSquares)
             {
-                grid[shipSquare[0], shipSquare[1]] = SquareState.IntactShipPart;
+                grid[shipSquare[0], shipSquare[1]] =
+                    SquareState.IntactShipPart;
             }
+
             currentPlayer.Grid = grid;
 
             if (AreShipsArranged)
@@ -75,9 +82,51 @@ namespace Battleship.Models
             }
         }
 
+        public ShotResult Shoot(int row, int column)
+        {
+            var intactSquareStates = new[]
+            {
+                SquareState.Miss,
+                SquareState.Hit
+            };
+            var canBeHit = EnemyGrids.All(
+                g => intactSquareStates.Contains(g.Grid[row, column])
+            );
+            if (!canBeHit)
+            {
+                return ShotResult.NoResult;
+            }
+
+
+            // todo battleship hit and sunk
+            // todo battleship next turn
+        }
+
         private PlayerGrid GetCurrentGamePlayer(string id)
         {
             return _playersGrids.Find(playerGrid => playerGrid.PlayerId == id);
+        }
+
+        private bool WillSink(int row, int column)
+        {
+//            var grid = _playersGrids[CurrentPlayerId];
+
+            /*todo battleship move game settings to domain*/
+            Func<SquareState[,], bool> isUpperSquareOccupied = grid => row - 1 < 0 ||
+                                    grid[row - 1, column] !=
+                                    // todo battleship + SquareState.Empty
+                                    SquareState.IntactShipPart;
+            var isLowerSquareOccupied = row + 1 > 9 ||
+                                    g.Grid[row + 1, column] !=
+                                    SquareState.IntactShipPart;
+            var isLeftSquareOccupied = row - 1 < 0 ||
+                                    g.Grid[row - 1, column] !=
+                                    SquareState.IntactShipPart;
+            var isRightSquareOccupied = row - 1 < 0 ||
+                                    g.Grid[row - 1, column] !=
+                                    SquareState.IntactShipPart;
+            return EnemyGrids.All(g =>
+                g.Grid[row, column] != SquareState.IntactShipPart);
         }
     }
 }

@@ -12,6 +12,22 @@ namespace Battleship.Hubs
     {
         private static readonly BattleshipGame Game = new BattleshipGame();
 
+        public override async Task OnConnectedAsync()
+        {
+            if (!Game.AddPlayer(Context.ConnectionId))
+            {
+                await Clients.Caller.SendAsync("MaxPlayers");
+            }
+
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            Game.RemovePlayer(Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
+        }
+
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public async Task ArrangeGrid(IEnumerable<int[]> shipCells)
         {
@@ -27,20 +43,9 @@ namespace Battleship.Hubs
             }
         }
 
-        public override async Task OnConnectedAsync()
+        public async Task Shoot(int row, int column)
         {
-            if (!Game.AddPlayer(Context.ConnectionId))
-            {
-                await Clients.Caller.SendAsync("MaxPlayers");
-            }
-
-            await base.OnConnectedAsync();
-        }
-
-        public override async Task OnDisconnectedAsync(Exception exception)
-        {
-            Game.RemovePlayer(Context.ConnectionId);
-            await base.OnDisconnectedAsync(exception);
+            Game.Shoot(row, column);
         }
     }
 }

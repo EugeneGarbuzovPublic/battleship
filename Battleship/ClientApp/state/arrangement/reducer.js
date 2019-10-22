@@ -5,21 +5,23 @@ import {
     SET_MAX_PLAYERS,
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
-    SET_WAITING_STAGE
+    SET_WAITING_STAGE,
+    SHOOT
 } from './actionTypes';
-import { EMPTY } from '../../domain/squareStates';
 import shipOrientations from '../../domain/shipOrientations';
 import { ARRANGEMENT, BATTLE, MAX_PLAYERS, WAITING } from '../../domain/stages';
 import strings from '../../strings';
 import { addShip } from '../../domain/operations';
+import initializeGrid from '../../utils/intializeGrid';
 
 
 const initialState = {
     /*todo battleship move game settings to domain*/
+    /*todo battleship initialize all state properties*/
     stage: ARRANGEMENT,
     shipType: shipTypes.reverse()[0],
     shipOrientation: shipOrientations.HORIZONTAL,
-    grid: new Array(10).fill(new Array(10).fill(EMPTY)),
+    grid: initializeGrid(),
     shipsToArrange: {
         1: 4,
         2: 3,
@@ -28,7 +30,7 @@ const initialState = {
     }
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
     switch (action.type) {
         case SET_SHIP_TYPE:
             /*todo battleship do not set state if not arrangement*/
@@ -40,7 +42,7 @@ export default function (state = initialState, action) {
                 ...state,
                 shipType: action.shipType
             };
-        /*todo battleship consider merging with SET_SHIP_TYPE*/
+            /*todo battleship consider merging with SET_SHIP_TYPE*/
         case SET_SHIP_ORIENTATION:
             if (!(action.shipOrientation in shipOrientations)) {
                 return state;
@@ -84,8 +86,17 @@ export default function (state = initialState, action) {
             return {
                 stage: BATTLE,
                 grid: state.grid,
-                isTurn: action.isTurn
+                isTurn: action.isTurn,
+                enemyGrid: initializeGrid()
             };
+        case SHOOT:
+            if (!state.isTurn && state.stage !== BATTLE) {
+                return state;
+            }
+
+
+
+            return state;
         default:
             return state;
     }

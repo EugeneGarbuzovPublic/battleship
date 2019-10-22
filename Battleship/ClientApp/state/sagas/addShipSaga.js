@@ -2,17 +2,17 @@
 import { setWaitingStage } from '../arrangement/actionCreators';
 import shipTypes from '../../domain/shipTypes';
 import connection from '../../services/connection';
-import { getShipCells } from '../../utils';
+import getShipCells from '../../utils/getShipCells';
 import { ARRANGEMENT } from '../../domain/stages';
 
-export default function* () {
+export default function*() {
     const state = yield select();
 
     if (state.stage !== ARRANGEMENT) {
         return;
     }
 
-    const shipsToArrange = state.shipsToArrange;
+    const { shipsToArrange } = state;
     const noMoreShipsToArrange =
         shipTypes.every(type => shipsToArrange[type] === 0);
     if (noMoreShipsToArrange) {
