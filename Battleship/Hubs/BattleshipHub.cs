@@ -45,7 +45,7 @@ namespace Battleship.Hubs
 
         public async Task Shoot(int row, int column)
         {
-            Game.Shoot(row, column);
+            Game.Shoot(Context.ConnectionId, row, column);
         }
     }
 }

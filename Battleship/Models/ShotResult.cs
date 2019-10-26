@@ -1,10 +1,11 @@
-﻿namespace Battleship.Models
+using System.Collections.Generic;
+
+namespace Battleship.Models
 {
-    public enum ShotResult
+    public class ShotResult
     {
-        NoResult,
-        Miss,
-        Hit,
-        Sunk
+        public List<Action> Actions { get; set; }
+
+        public bool TurnsSwitched { get; set; }
     }
 }
