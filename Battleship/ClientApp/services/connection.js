@@ -12,6 +12,10 @@ connection.on('shipsArranged', isTurn => {
     store.dispatch(setBattle(isTurn));
 });
 
+connection.on('shot', data => {
+    console.log(data);
+});
+
 connection.start();
 
 export default connection;

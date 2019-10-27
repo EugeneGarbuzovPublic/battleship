@@ -1,164 +1,148 @@
 import shipOrientations from './shipOrientations';
-import { EMPTY, INTACT_SHIP_PART } from './squareStates';
 
-function getHorizontalShipPoint(ship, index) {
+function getHorizontalShipPoint(shipData, index) {
     return {
-        x: ship.x + index,
-        y: ship.y
+        x: shipData.x + index,
+        y: shipData.y
     };
 }
 
-function getVerticalShipPoint(ship, index) {
+function getVerticalShipPoint(shipData, index) {
     return {
-        x: ship.x,
-        y: ship.y + index
+        x: shipData.x,
+        y: shipData.y + index
     };
 }
 
-function getShipPoints(ship, getShipPoint) {
-    return new Array(ship.type).fill(0).map((element, index) =>
-        getShipPoint(ship, index)
+function getShipPoints(shipData, getShipPoint) {
+    return new Array(shipData.type).fill(0).map((element, index) =>
+        getShipPoint(shipData, index)
     );
 }
 
-function checkShipPoints(grid, shipPoints) {
+function isPointEmpty(point, ships) {
+    return ships.every(ship =>
+        ship.every(shipSquare =>
+            shipSquare.x !== point.x || shipSquare.y !== point.y)
+    );
+}
+
+function checkShipPoints(ships, shipPoints) {
     return shipPoints.every(point =>
         /*todo battleship move game settings to domain*/
         point.x >= 0 && point.x <= 9 &&
         point.y >= 0 && point.y <= 9 &&
-        grid[point.x][point.y] === EMPTY
+        isPointEmpty(point, ships)
     );
 }
 
-function getHorizontalShipSurroundings(ship) {
+function getHorizontalShipSurroundings(shipData) {
     return [
         {
-            x: ship.x - 1,
-            y: ship.y
+            x: shipData.x - 1,
+            y: shipData.y
         },
         {
-            x: ship.x + ship.type,
-            y: ship.y
+            x: shipData.x + shipData.type,
+            y: shipData.y
         },
-        ...new Array(ship.type + 2).fill(0).map(
+        ...new Array(shipData.type + 2).fill(0).map(
             (element, index) => ({
-                x: ship.x - 1 + index,
-                y: ship.y - 1
+                x: shipData.x - 1 + index,
+                y: shipData.y - 1
             })
         ),
-        ...new Array(ship.type + 2).fill(0).map(
+        ...new Array(shipData.type + 2).fill(0).map(
             (element, index) => ({
-                x: ship.x - 1 + index,
-                y: ship.y + 1
+                x: shipData.x - 1 + index,
+                y: shipData.y + 1
             })
         )
     ];
 }
 
-function getVerticalShipSurroundings(ship) {
+function getVerticalShipSurroundings(shipData) {
     return [
         {
-            x: ship.x,
-            y: ship.y - 1
+            x: shipData.x,
+            y: shipData.y - 1
         },
         {
-            x: ship.x,
-            y: ship.y + ship.type
+            x: shipData.x,
+            y: shipData.y + shipData.type
         },
-        ...new Array(ship.type + 2).fill(0).map(
+        ...new Array(shipData.type + 2).fill(0).map(
             (element, index) => ({
-                x: ship.x - 1,
-                y: ship.y - 1 + index
+                x: shipData.x - 1,
+                y: shipData.y - 1 + index
             })
         ),
-        ...new Array(ship.type + 2).fill(0).map(
+        ...new Array(shipData.type + 2).fill(0).map(
             (element, index) => ({
-                x: ship.x + 1,
-                y: ship.y - 1 + index
+                x: shipData.x + 1,
+                y: shipData.y - 1 + index
             })
         )
     ];
 }
 
-function checkSurroundings(grid, surroundings) {
+function checkSurroundings(ships, surroundings) {
     return surroundings.every(point =>
         /*todo battleship move game settings to domain*/
         point.x < 0 || point.x > 9 ||
         point.y < 0 || point.y > 9 ||
-        grid[point.x][point.y] === EMPTY
+        isPointEmpty(point, ships)
     );
 }
 
-function addHorizontalShipToGrid(grid, ship) {
-    const newGrid = [...grid];
-    for (let i = 0; i < ship.type; i++) {
-        const newColumn = [...grid[ship.x + i]];
-        newColumn[ship.y] = INTACT_SHIP_PART;
-        newGrid[ship.x + i] = newColumn;
-    }
-    return newGrid;
-}
-
-function addVerticalShipToGrid(grid, ship) {
-    const newGrid = [...grid];
-    const newColumn = [...grid[ship.x]];
-    for (let i = 0; i < ship.type; i++) {
-        newColumn[ship.y + i] = INTACT_SHIP_PART;
-    }
-    newGrid[ship.x] = newColumn;
-    return newGrid;
-}
-
-function updateShipsToArrange(shipsToArrange, ship) {
+function updateShipsToArrange(shipsToArrange, shipData) {
     return {
         ...shipsToArrange,
-        [ship.type]: shipsToArrange[ship.type] - 1
+        [shipData.type]: shipsToArrange[shipData.type] - 1
     };
 }
 
-function addSpecificShip(state, ship, algorithms) {
-    const shipPoints = getShipPoints(ship, algorithms.getShipPoint);
-    const areShipPointsAvailable = checkShipPoints(state.grid, shipPoints);
+function addSpecificShip(state, shipData, algorithms) {
+    const shipPoints = getShipPoints(shipData, algorithms.getShipPoint);
+    const areShipPointsAvailable = checkShipPoints(state.ownShips, shipPoints);
     if (!areShipPointsAvailable) {
         return state;
     }
 
-    const surroundings = algorithms.getShipSurroundings(ship);
+    const surroundings = algorithms.getShipSurroundings(shipData);
     const areSurroundingsAvailable =
-        checkSurroundings(state.grid, surroundings);
+        checkSurroundings(state.ownShips, surroundings);
     if (!areSurroundingsAvailable) {
         return state;
     }
 
-    const grid = algorithms.addShipToGrid(state.grid, ship);
-    const shipsToArrange = updateShipsToArrange(state.shipsToArrange, ship);
+    const ownShips = [...state.ownShips, shipPoints];
+    const shipsToArrange = updateShipsToArrange(state.shipsToArrange, shipData);
     return {
         ...state,
-        grid,
+        ownShips,
         shipsToArrange
     };
 }
 
-export function addShip(state, ship) {
-    if (state.shipsToArrange[ship.type] === 0) {
+export function addShip(state, shipData) {
+    if (state.shipsToArrange[shipData.type] === 0) {
         return state;
     }
 
-    switch (ship.orientation) {
+    switch (shipData.orientation) {
         case shipOrientations.HORIZONTAL:
             const horizontalAlgorithms = {
                 getShipPoint: getHorizontalShipPoint,
-                getShipSurroundings: getHorizontalShipSurroundings,
-                addShipToGrid: addHorizontalShipToGrid
+                getShipSurroundings: getHorizontalShipSurroundings
             };
-            return addSpecificShip(state, ship, horizontalAlgorithms);
+            return addSpecificShip(state, shipData, horizontalAlgorithms);
         case shipOrientations.VERTICAL:
             const verticalAlgorithms = {
                 getShipPoint: getVerticalShipPoint,
-                getShipSurroundings: getVerticalShipSurroundings,
-                addShipToGrid: addVerticalShipToGrid
+                getShipSurroundings: getVerticalShipSurroundings
             };
-            return addSpecificShip(state, ship, verticalAlgorithms);
+            return addSpecificShip(state, shipData, verticalAlgorithms);
         default:
             return state;
     }

@@ -12,7 +12,6 @@ import shipOrientations from '../../domain/shipOrientations';
 import { ARRANGEMENT, BATTLE, MAX_PLAYERS, WAITING } from '../../domain/stages';
 import strings from '../../strings';
 import { addShip } from '../../domain/operations';
-import initializeGrid from '../../utils/intializeGrid';
 
 
 const initialState = {
@@ -21,13 +20,18 @@ const initialState = {
     stage: ARRANGEMENT,
     shipType: shipTypes.reverse()[0],
     shipOrientation: shipOrientations.HORIZONTAL,
-    grid: initializeGrid(),
     shipsToArrange: {
         1: 4,
         2: 3,
         3: 2,
         4: 1
-    }
+    },
+    ownShips: [],
+    enemyShots: [],
+    ownMisses: [],
+    ownHits: [],
+    isTurn: false,
+    notification: null
 };
 
 export default function(state = initialState, action) {
@@ -58,10 +62,10 @@ export default function(state = initialState, action) {
             }
 
             const gameState = {
-                grid: state.grid,
+                ownShips: state.ownShips,
                 shipsToArrange: state.shipsToArrange
             };
-            const ship = {
+            const shipData = {
                 type: state.shipType,
                 orientation: state.shipOrientation,
                 x: action.horizontalIndex,
@@ -69,25 +73,31 @@ export default function(state = initialState, action) {
             };
             return {
                 ...state,
-                ...addShip(gameState, ship)
+                ...addShip(gameState, shipData)
             };
         case SET_WAITING_STAGE:
             return {
-                grid: state.grid,
+                ...state,
+                ownShips: state.ownShips,
                 stage: WAITING,
                 notification: strings.waitingForOpponent
             };
         case SET_MAX_PLAYERS:
             return {
+                ...state,
                 stage: MAX_PLAYERS,
                 notification: strings.maxPlayers
             };
         case SET_BATTLE:
             return {
+                ...state,
+                notification: null,
                 stage: BATTLE,
-                grid: state.grid,
-                isTurn: action.isTurn,
-                enemyGrid: initializeGrid()
+                ownShips: state.ownShips,
+                enemyShots: [],
+                ownMisses: [],
+                ownHits: [],
+                isTurn: action.isTurn
             };
         case SHOOT:
             if (!state.isTurn && state.stage !== BATTLE) {

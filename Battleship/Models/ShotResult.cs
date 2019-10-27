@@ -4,8 +4,11 @@ namespace Battleship.Models
 {
     public class ShotResult
     {
-        public List<Action> Actions { get; set; }
+        public Action CommonAction { get; set; }
 
-        public bool TurnsSwitched { get; set; }
+        public List<Action> ShootingPlayerActions { get; } =
+            new List<Action>();
+
+        public string CurrentPlayerId { get; set; }
     }
 }

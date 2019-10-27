@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 import classNames from 'classnames';
-import { INTACT_SHIP_PART } from '../../domain/squareStates';
+import { EMPTY, INTACT_SHIP_PART } from '../../domain/squareStates';
 
 export default function Square(props) {
     const className = classNames({
@@ -16,7 +16,9 @@ export default function Square(props) {
             return;
         }
 
-        props.onClick();
+        if (props.state === EMPTY) {
+            props.onClick();
+        }
     };
 
     return (

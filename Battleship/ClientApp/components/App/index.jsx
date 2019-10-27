@@ -16,8 +16,9 @@ import EnemyGrid from '../EnemyGrid';
 /*todo battleship global ImmutableJS*/
 /*todo battleship global propTypes*/
 /*todo battleship global GraphQL*/
+/*todo battleship global a11y*/
 
-/*todo battleship lint on commit*/
+/*todo battleship lint on commit (git hooks)*/
 /*todo battleship React.memo*/
 /*todo battleship highlight squares on hover*/
 /*todo battleship auto arrangement*/

@@ -19,14 +19,6 @@ namespace Battleship.Models
             return true;
         }
 
-        public void AddRange(IEnumerable<Square> squares)
-        {
-            foreach (var square in squares)
-            {
-                Add(square);
-            }
-        }
-
         public bool Exists(Predicate<Square> match)
         {
             return _squares.Exists(match);

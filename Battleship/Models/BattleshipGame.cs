@@ -8,9 +8,13 @@ namespace Battleship.Models
     {
         private const int RequiredPlayersCount = 2;
 
+        public const int GridSize = 10;
+
         private const int MinSquareIndex = 0;
 
         private const int MaxSquareIndex = GridSize - 1;
+
+        public static int MaxShipSize => 4;
 
         private const bool ShouldAddUselessShots = true;
 
@@ -20,11 +24,7 @@ namespace Battleship.Models
 
         private int? _currentPlayerIndex;
 
-        public const int GridSize = 10;
-
-        public static int MaxShipSize => 4;
-
-        public string CurrentPlayerId =>
+        private string CurrentPlayerId =>
             _currentPlayerIndex.HasValue
                 ? _playersGrids[_currentPlayerIndex.Value].PlayerId
                 : null;
@@ -32,7 +32,7 @@ namespace Battleship.Models
         private PlayerGrid EnemyGrid =>
             _playersGrids.First(g => g.PlayerId != CurrentPlayerId);
 
-        public bool AreShipsArranged =>
+        private bool AreShipsArranged =>
             _playersGrids.Count == RequiredPlayersCount &&
             _playersGrids.All(playerGrid => playerGrid.Ships != null);
 
@@ -55,8 +55,8 @@ namespace Battleship.Models
             _playersGrids.RemoveAll(playerGrid => playerGrid.PlayerId == id);
         }
 
-        public void ArrangeShips(string playerId,
-            IEnumerable<int[]> shipSquares)
+        public ArrangementResult ArrangeShips(string playerId,
+            IEnumerable<Ship> ships)
         {
             /*todo battleship check correctness*/
             var currentPlayer = GetPlayerGrid(playerId);
@@ -75,29 +75,28 @@ namespace Battleship.Models
                     "Ships rearrangement is not allowed.");
             }
 
-            var grid = new SquareState[GridSize, GridSize];
-            foreach (var shipSquare in shipSquares)
-            {
-                grid[shipSquare[0], shipSquare[1]] =
-                    SquareState.IntactShipPart;
-            }
+            currentPlayer.Ships = ships;
 
-            currentPlayer.Grid = grid;
-
-            if (AreShipsArranged)
+            var areShipsArranged = AreShipsArranged;
+            if (areShipsArranged)
             {
                 /*todo battleship use a stronger algorithm*/
                 _currentPlayerIndex =
                     new Random().Next(0, RequiredPlayersCount);
             }
+
+            return new ArrangementResult
+            {
+                AreShipsArranged = areShipsArranged,
+                CurrentPlayerId = CurrentPlayerId
+            };
         }
 
         public ShotResult Shoot(string playerId, int row, int column)
         {
             var noneResult = new ShotResult
             {
-                Actions = new List<Action>(),
-                TurnsSwitched = false,
+                CurrentPlayerId = CurrentPlayerId
             };
 
             if (playerId != CurrentPlayerId)
@@ -117,11 +116,7 @@ namespace Battleship.Models
                 return noneResult;
             }
 
-            var result = new ShotResult
-            {
-                Actions = new List<Action>(),
-                TurnsSwitched = true,
-            };
+            var result = new ShotResult();
 
             var hitShip = EnemyGrid.Ships.FirstOrDefault(ship =>
                 ship.Squares.Any(
@@ -134,36 +129,39 @@ namespace Battleship.Models
                     shots.Exists(sh => sh == currentShot));
                 if (isSunk)
                 {
-                    result.Actions.Add(new Action
+                    result.CommonAction = new Action
                     {
                         Square = currentShot,
                         Result = SquareShotResult.Hit,
-                    });
+                    };
                     // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                     if (ShouldAddUselessShots)
                     {
-                        AddUselessShots(hitShip, shots);
+                        var uselessShots = AddUselessShots(hitShip, shots);
+                        result.ShootingPlayerActions.AddRange(uselessShots);
                     }
                 }
                 else
                 {
-                    result.Actions.Add(new Action
+                    result.CommonAction = new Action
                     {
                         Square = currentShot,
                         Result = SquareShotResult.Hit,
-                    });
+                    };
                 }
             }
             else
             {
-                result.Actions.Add(new Action
+                result.CommonAction = new Action
                 {
                     Square = currentShot,
                     Result = SquareShotResult.Miss,
-                });
+                };
             }
 
+            shots.Add(currentShot);
             SetNextTurn();
+            result.CurrentPlayerId = CurrentPlayerId;
             return result;
         }
 
@@ -191,9 +189,10 @@ namespace Battleship.Models
             return _playersGrids.Find(playerGrid => playerGrid.PlayerId == id);
         }
 
-        private static void AddUselessShots(Ship ship, ShotList shots)
+        private static IEnumerable<Action> AddUselessShots(Ship ship, ShotList shots)
         {
             var squares = ship.Squares;
+            var uselessShots = new List<Square>();
             foreach (var square in squares)
             {
                 var shifts = new[]
@@ -206,8 +205,9 @@ namespace Battleship.Models
                         pointShift.rowShift != 0 &&
                         pointShift.columnShift != 0);
 
-                /*todo battleship rename all vertical to row
-                and all horizontal to column*/
+                /*todo battleship rename all vertical and y to row,
+                all horizontal and x to column,
+                all points to squares*/
                 var closeSquaresIndices = pointShifts.Select(pointShift =>
                     (rowIndex: square.VerticalIndex + pointShift.rowShift,
                         columnIndex: square.HorizontalIndex +
@@ -218,11 +218,16 @@ namespace Battleship.Models
                         IsCorrectSquareIndex(closeSquareIndices.rowIndex) &&
                         IsCorrectSquareIndex(closeSquareIndices.columnIndex));
 
-                var uselessShots = existingSquares.Select(existingSquare =>
+                var uselessShotsForSquare = existingSquares.Select(existingSquare =>
                     new Square(existingSquare.rowIndex,
                         existingSquare.columnIndex));
-                shots.AddRange(uselessShots);
+                uselessShots.AddRange(uselessShotsForSquare.Where(shots.Add));
             }
+            return uselessShots.Select(uselessShot => new Action
+            {
+                Square = uselessShot,
+                Result = SquareShotResult.Miss
+            });
         }
 
         private void SetNextTurn()
