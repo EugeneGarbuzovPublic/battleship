@@ -6,12 +6,14 @@ import {
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
     SET_WAITING_STAGE,
-    SHOOT
+    OWN_SHOT_RESULT,
+    ENEMY_SHOT_RESULT
 } from './actionTypes';
 import shipOrientations from '../../domain/shipOrientations';
 import { ARRANGEMENT, BATTLE, MAX_PLAYERS, WAITING } from '../../domain/stages';
 import strings from '../../strings';
 import { addShip } from '../../domain/operations';
+import { HIT, MISS } from '../../domain/shotResults';
 
 
 const initialState = {
@@ -33,6 +35,12 @@ const initialState = {
     isTurn: false,
     notification: null
 };
+
+function getResultsOfType(actions, type) {
+    return actions
+        .filter(({ result }) => result === type)
+        .map(({ square }) => square);
+}
 
 export default function(state = initialState, action) {
     switch (action.type) {
@@ -99,14 +107,24 @@ export default function(state = initialState, action) {
                 ownHits: [],
                 isTurn: action.isTurn
             };
-        case SHOOT:
-            if (!state.isTurn && state.stage !== BATTLE) {
-                return state;
-            }
+        case OWN_SHOT_RESULT:
+            const ownMisses = getResultsOfType(action.actions, MISS);
+            const ownHits = getResultsOfType(action.actions, HIT);
 
+            return {
+                ...state,
+                ownMisses: state.ownMisses.concat(ownMisses),
+                ownHits: state.ownHits.concat(ownHits),
+                isTurn: action.isTurn
+            };
+        case ENEMY_SHOT_RESULT:
+            const actions = action.actions.map(({ square }) => square);
 
-
-            return state;
+            return {
+                ...state,
+                enemyShots: state.enemyShots.concat(actions),
+                isTurn: action.isTurn
+            };
         default:
             return state;
     }

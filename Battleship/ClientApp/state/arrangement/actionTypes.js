@@ -5,4 +5,5 @@ export const SET_WAITING_STAGE = 'SET_WAITING_STAGE';
 export const SET_MAX_PLAYERS = 'SET_MAX_PLAYERS';
 export const SET_BATTLE = 'SET_BATTLE';
 export const SHOOT = 'SHOOT';
-
+export const OWN_SHOT_RESULT = 'OWN_SHOT_RESULT';
+export const ENEMY_SHOT_RESULT = 'ENEMY_SHOT_RESULT';

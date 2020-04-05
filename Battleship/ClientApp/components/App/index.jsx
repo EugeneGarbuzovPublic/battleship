@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import OwnGrid from '../OwnGrid';
 import './styles.css';
@@ -8,6 +8,7 @@ import ShipOrientationSelection from '../ShipOrientationSelection';
 import Notification from '../Notification';
 import TurnIndicator from '../TurnIndicator';
 import EnemyGrid from '../EnemyGrid';
+import { addShip, setShipType } from '../../state/arrangement/actionCreators';
 
 /*todo battleship global ErrorBoundary*/
 /*todo battleship global tests*/
@@ -25,6 +26,12 @@ import EnemyGrid from '../EnemyGrid';
 
 function App(props) {
     /*todo battleship add clear/undo buttons during arrangement*/
+
+    useEffect(() => {
+        /*todo battleship fix connection when one player is already waiting*/
+        props.setTestArrangement();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>
@@ -57,6 +64,22 @@ const ConnectedApp = connect(
     state => ({
         stage: state.stage,
         shipType: state.shipType
+    }),
+    dispatch => ({
+        setTestArrangement: () => {
+            dispatch(addShip(0, 0));
+            dispatch(setShipType(3));
+            dispatch(addShip(0, 2));
+            dispatch(addShip(0, 4));
+            dispatch(setShipType(2));
+            dispatch(addShip(0, 6));
+            dispatch(addShip(0, 8));
+            dispatch(addShip(5, 0));
+            dispatch(setShipType(1));
+            dispatch(addShip(5, 2));
+            dispatch(addShip(5, 4));
+            dispatch(addShip(5, 6));
+        }
     })
 )(App);
 

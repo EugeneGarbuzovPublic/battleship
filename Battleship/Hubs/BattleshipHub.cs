@@ -56,6 +56,7 @@ namespace Battleship.Hubs
 
         // todo battleship test two consecutive shots from the same player
         // todo battleship move domain to a separate assembly
+        // todo battleship consider getting rid of returns
         public async Task<ShotResultForPlayer> Shoot(int row, int column)
         {
             var result = Game.Shoot(Context.ConnectionId, row, column);

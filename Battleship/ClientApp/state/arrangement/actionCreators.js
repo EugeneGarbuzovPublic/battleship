@@ -5,7 +5,9 @@ import {
     SET_SHIP_ORIENTATION,
     SET_SHIP_TYPE,
     SET_WAITING_STAGE,
-    SHOOT
+    SHOOT,
+    OWN_SHOT_RESULT,
+    ENEMY_SHOT_RESULT
 } from './actionTypes';
 
 export function setShipType(shipType) {
@@ -54,5 +56,21 @@ export function shoot(horizontalIndex, verticalIndex) {
         type: SHOOT,
         horizontalIndex,
         verticalIndex
+    };
+}
+
+export function applyOwnShotResult({ actions, isTurn }) {
+    return {
+        type: OWN_SHOT_RESULT,
+        actions,
+        isTurn
+    };
+}
+
+export function applyEnemyShotResult({ actions, isTurn }) {
+    return {
+        type: ENEMY_SHOT_RESULT,
+        actions,
+        isTurn
     };
 }

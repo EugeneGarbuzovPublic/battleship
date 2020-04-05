@@ -1,5 +1,9 @@
 import { HubConnectionBuilder } from '@aspnet/signalr';
-import { setBattle, setMaxPlayers } from '../state/arrangement/actionCreators';
+import {
+    applyEnemyShotResult,
+    setBattle,
+    setMaxPlayers
+} from '../state/arrangement/actionCreators';
 import store from '../state/store';
 
 const connection = new HubConnectionBuilder().withUrl('/game').build();
@@ -12,8 +16,8 @@ connection.on('shipsArranged', isTurn => {
     store.dispatch(setBattle(isTurn));
 });
 
-connection.on('shot', data => {
-    console.log(data);
+connection.on('shot', result => {
+    store.dispatch(applyEnemyShotResult(result));
 });
 
 connection.start();
