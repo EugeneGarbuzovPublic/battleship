@@ -36,8 +36,8 @@
         "style-loader": "^1.0.0",
         "webpack": "^4.39.3",
         "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.8.0",
-        "webpack-hot-middleware": "^2.25.0"
+        "webpack-dev-server": "^3.11.3",
+        "webpack-hot-middleware": "^2.25.3"
     },
     "dependencies": {
         "@aspnet/signalr": "^1.1.4",
